@@ -38,9 +38,13 @@ public class ArbolBinarioControlador implements Serializable {
     private int dato;
     private boolean verInOrden = false;
 
+    
+    private int multiplicador = 4;
+
     private String datoscsv = "18,15,13,17,8,14,-8,10,59,28,80,78,90";
     private String datosMay = "90";
     private String datosMen = "-8";
+    
 
     public String getDatosMay() {
         return datosMay;
@@ -114,6 +118,14 @@ public class ArbolBinarioControlador implements Serializable {
 
     public void setArbol(ArbolBinario arbol) {
         this.arbol = arbol;
+    }
+    
+    public int getMultiplicador() {
+        return multiplicador;
+    }
+
+    public void setMultiplicador(int multiplicador) {
+        this.multiplicador = multiplicador;
     }
 
     /**
@@ -274,5 +286,24 @@ public class ArbolBinarioControlador implements Serializable {
             pintarArbolTerminados(reco.getDerecha(), model, elementHijo, x + 5, y + 5);
         }
     }
+    
+    public void podar(){
+        arbol.podar();
+        pintarArbol();
+    }
+    
+    public void multiplicar(){
+        if(this.multiplicador <= 0){
+            JsfUtil.addSuccessMessage("imposible Multiplicar por 0 o negativos");
+        }else{
+            arbol.productoValor(this.multiplicador);
+            JsfUtil.addSuccessMessage("Multiplicacion exitosa" + this.multiplicador);
+            this.multiplicador = 4;
+            pintarArbol();
+        }
+    }
+    
+   
+    
 
 }

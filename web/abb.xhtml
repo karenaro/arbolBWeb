@@ -17,6 +17,9 @@
                 <p:commandButton ajax="false"  value="Agregar" action="#{arbolBinarioControlador.adicionarNodo()}"
                                  update="@all" />
                 <p:commandButton value="InOrden" action="#{arbolBinarioControlador.habilitarInOrden()}" update="@all" ajax="false"/>
+                
+                <p:commandButton value="podar" action="#{arbolBinarioControlador.podar()}"
+                                 update="@all" ajax="false"/>
                 <p:outputLabel value="Nro Nodos: "/>
                 <p:outputLabel value="#{arbolBinarioControlador.arbol.contarNodos()}"/>
 
@@ -54,17 +57,27 @@
         
         <h:form>
             <p:panel header="Valores Menor-Mayor">
-                <p:inputTextarea required="true" cols="20" value="#{arbolBinarioControlador.datosMen}"/>
+                <p:inputText required="true" value="#{arbolBinarioControlador.datosMen}"/>
                 <p:commandButton value="Menor valor"
                                  action="#{arbolBinarioControlador.arbol.menorValor(reco)}"
                                  update="@all" ajax="false"/>
-                <p:inputTextarea required="true" cols="20" value="#{arbolBinarioControlador.datosMay}"/>
+                <p:inputText required="true" value="#{arbolBinarioControlador.datosMay}"/>
                 <p:commandButton value="Mayor valor"
                                  action="#{arbolBinarioControlador.arbol.mayorValor(reco)}"
                                  update="@all" ajax="false"/>
 
             </p:panel>
         </h:form>
+        
+        <h:form>
+            <p:panel header="multiplicar Nodos">
+                <p:inputText required="true" value="#{arbolBinarioControlador.multiplicador}"/>
+                <p:commandButton value="Producto"
+                                 action="#{arbolBinarioControlador.multiplicar()}"
+                                 update="@all" ajax="false"/>
+            </p:panel>
+        </h:form>
+        
         
         <h:panelGroup rendered="#{arbolBinarioControlador.verInOrden}">
             <p:panel header="InOrden">
@@ -77,6 +90,8 @@
 
             </p:panel>
         </h:panelGroup>
+        
+        
 
         <p:panel header="PreOrden">
             <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.preOrden()}">
@@ -90,6 +105,15 @@
         <p:panel header="PostOrden">
             <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.postOrden()}">
                 <p:column headerText="Número">
+                    <h:outputText value="#{data}" />
+                </p:column>
+
+            </p:dataTable>
+        </p:panel>
+        
+        <p:panel header="Imprimir Niveles">
+            <p:dataTable var="data" value="#{arbolBinarioControlador.arbol.imprimirNivel()}">
+                <p:column headerText="Nivel">
                     <h:outputText value="#{data}" />
                 </p:column>
 
